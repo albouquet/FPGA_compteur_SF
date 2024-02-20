@@ -1,0 +1,40 @@
+   
+Library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+
+entity lab2 is
+	port (
+		clk_clk       : in std_logic ;
+		reset_reset_n : in std_logic ;  -- reset_n
+		afficheur1    : out std_logic_vector(6 downto 0);
+		afficheur2    : out std_logic_vector(6 downto 0);
+		afficheur3    : out std_logic_vector(6 downto 0)
+	);
+end entity lab2;
+
+
+architecture arch_albouquet_lab2 of lab2 is
+
+
+	component qsys_lab2 is
+        port (
+            clk_clk                          : in  std_logic                    := 'X'; -- clk
+            pio_0_external_connection_export : out std_logic_vector(6 downto 0);        -- export
+            pio_1_external_connection_export : out std_logic_vector(6 downto 0);        -- export
+            pio_2_external_connection_export : out std_logic_vector(6 downto 0);        -- export
+            reset_reset_n                    : in  std_logic                    := 'X'  -- reset_n
+        );
+    end component qsys_lab2;
+
+    u0 : component qsys_lab2
+        port map (
+            clk_clk                          => clk_clk,                          --                       clk.clk
+            pio_0_external_connection_export => afficheur1, -- pio_0_external_connection.export
+            pio_1_external_connection_export => afficheur2, -- pio_1_external_connection.export
+            pio_2_external_connection_export => afficheur3, -- pio_2_external_connection.export
+            reset_reset_n                    => reset_reset_n                     --                     reset.reset_n
+        );
+		  
+		  
+end architecture arch_albouquet_lab2;
